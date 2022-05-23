@@ -1,0 +1,20 @@
+get balance test case
+
+'''test "check_balance" do
+      assert ExBanking.get_balance("user1" , "usd") = {:ok , _balance}
+    end
+'''
+
+test "returns error when there are too many request for balance enquiry" do
+      
+    end
+
+
+
+withdraw
+
+test "withdraw money and returns the balance left" do
+    ExBanking.deposit("user1" , 10 , "usd")
+    assert ExBanking.withdraw("user1" , 5 , "usd") = {:ok , _balance}
+  end
+
