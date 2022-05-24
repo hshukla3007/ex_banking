@@ -70,10 +70,10 @@ defmodule ExBanking do
   def send(from_user, to_user, amount, currency)
       when is_binary(from_user) and is_binary(to_user) and is_integer(amount) and amount >= 0 and
              is_binary(currency) do
-    opts = [
+    opts = %{
       user_exist_error_msg: :sender_does_not_exist,
       requests_limit_error_msg: :too_many_requests_to_sender
-    ]
+    }
 
     User.request(from_user, {:send, to_user, amount, currency}, opts)
   end

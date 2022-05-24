@@ -78,7 +78,7 @@ defmodule ExBanking.User do
     end
   end
 
-  defp user_exist?(user, opts) do
+  def user_exist?(user, opts) do
     case Registry.lookup(Registry.Users, user) do
       [] ->
         error_msg = Map.get(opts, :user_exist_error_msg, :user_does_not_exist)
@@ -89,13 +89,13 @@ defmodule ExBanking.User do
     end
   end
 
-  defp requests_limit?(pid, opts) do
+  def requests_limit?(pid, opts) do
     case :erlang.process_info(pid, :message_queue_len) do
       {:message_queue_len, length} when length < 10 ->
         :ok
 
       _ ->
-        error_msg = Keyword.get(opts, :requests_limit_error_msg, :too_many_requests_to_user)
+        error_msg = Map.get(opts, :requests_limit_error_msg, :too_many_requests_to_user)
         {:error, error_msg}
     end
   end
